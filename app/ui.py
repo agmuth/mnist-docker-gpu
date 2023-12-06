@@ -1,24 +1,22 @@
 
 import torch
 from pathlib import Path
-from src.cnn import CNN, img_transform
+
 import torch
+import gradio as gr
 from math import exp
+from src.utils import ModelUtils, DataUtils
 
-model_path = Path(__file__).parent.parent.joinpath("mnist_cnn.pt")
-model = CNN()
-model.load_state_dict(torch.load(model_path))
-model.eval()
 
+model = ModelUtils.load_model_from_file("mnist_cnn.pt") # move into api + config
 
 def recognize_digit(sketchpad):
     img = sketchpad['layers'][0][:, :, -1]
-    img = img_transform(img)
+    img = DataUtils.img_transform(img)
     preds = model(img)
-    return {str(i): exp(float(pred)) for i, pred in enumerate(preds[0])}
+    probs = torch.exp(preds)
+    return {str(i): float(prob) for i, prob in enumerate(probs[0])}
 
-
-sp = gr.Sketchpad()
 
 ui = gr.Interface(
     fn=recognize_digit,

@@ -12,6 +12,7 @@ torch = "^2.1.1"
 torchvision = "^0.16.1"
 fastapi = "^0.104.1"
 gradio = "^4.8.0"
+typer = "^0.9.0"
 
 
 [tool.poetry.group.dev.dependencies]
