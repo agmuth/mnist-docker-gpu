@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "mnist-docker-gpu"
+version = "0.1.0"
+description = ""
+authors = ["andrew muth"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.1.1"
+torchvision = "^0.16.1"
+fastapi = "^0.104.1"
+gradio = "^4.8.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+isort = "^5.12.0"
+ruff = "^0.1.7"
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
