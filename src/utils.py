@@ -12,7 +12,7 @@ class DataUtils:
     _tmp_dir = "../data"
     img_transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Resize((28, 28)),
+        transforms.Resize((28, 28), antialias=True),
         transforms.Normalize((0.1307,), (0.3081,))
     ])
     
