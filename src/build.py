@@ -9,6 +9,7 @@ from schemas import ModelBuildConfig
 from src.cnn import CNN
 from src.constants import CONFIG_DIR, MODEL_DIR
 from utils import Tester, Trainer
+import typer
 
 
 def main(config_file: str = "mnist_cnn.yaml"):  # run as cli
@@ -22,6 +23,7 @@ def main(config_file: str = "mnist_cnn.yaml"):  # run as cli
 
     if use_cuda:
         device = torch.device("cuda")
+    else:
         device = torch.device("cpu")
 
     train_kwargs = {"batch_size": args.batch_size}
@@ -48,4 +50,4 @@ def main(config_file: str = "mnist_cnn.yaml"):  # run as cli
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(main)
