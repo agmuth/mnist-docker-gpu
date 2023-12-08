@@ -27,4 +27,4 @@ ui = gr.Interface(
 )
 
 if __name__ == "__main__":
-    ui.launch(server_port=7861)  # 7860
+    ui.launch(server_port=7860)
