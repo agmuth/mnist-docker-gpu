@@ -1,10 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
-import torch
-
 from torchvision import transforms
-
-
 
 
 class CNN(nn.Module):
@@ -25,13 +21,12 @@ class CNN(nn.Module):
         x = self.fc2(x)
         output = F.log_softmax(x, dim=1)
         return output
-    
-    
-    
-img_transform = transforms.Compose([
+
+
+img_transform = transforms.Compose(
+    [
         transforms.ToTensor(),
         transforms.Resize((28, 28)),
-        transforms.Normalize((0.1307,), (0.3081,))
-    ])
-
-
+        transforms.Normalize((0.1307,), (0.3081,)),
+    ]
+)
