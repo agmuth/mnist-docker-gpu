@@ -1,4 +1,18 @@
-FROM python:3.10
+# FROM python:3.10-slim
+
+FROM nvidia/cuda:12.3.1-base-ubuntu22.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y \
+        git \
+        python3-pip \
+        python3-dev \
+        python3-opencv \
+        libglib2.0-0
 
 RUN pip install poetry==1.7.1
 

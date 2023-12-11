@@ -16,7 +16,7 @@ build:
 	poetry run python src/build.py $(config)
 
 image:
-	docker build -t mnist-gradio .
+	docker image build -t mnist-gradio .
 
 container:
-	docker run -d --name mnist-gradio -p 7860:7860 mnist-gradio
+	docker container run -d --name mnist-gradio --gpus all -p 7860:7860 mnist-gradio

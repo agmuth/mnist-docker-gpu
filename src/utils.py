@@ -17,16 +17,19 @@ class DataUtils:
         ]
     )
 
-    train_dataset = _dataset(
-        _tmp_dir, train=True, download=True, transform=img_transform
-    )
-    test_dataset = _dataset(_tmp_dir, train=False, transform=img_transform)
+    # train_dataset = _dataset(
+    #     _tmp_dir, train=True, download=False, transform=img_transform
+    # )
+    # test_dataset = _dataset(_tmp_dir, train=False, transform=img_transform)
 
 
 class Trainer:
     def __init__(self, loader_kwargs):
         self._loader = torch.utils.data.DataLoader(
-            DataUtils.train_dataset, **loader_kwargs
+            DataUtils._dataset(
+                DataUtils._tmp_dir, train=True, download=True, transform=DataUtils.img_transform
+            ),
+            **loader_kwargs
         )
 
     def train(self, args, model, device, optimizer, epoch):
@@ -55,7 +58,7 @@ class Trainer:
 class Tester:
     def __init__(self, loader_kwargs):
         self._loader = torch.utils.data.DataLoader(
-            DataUtils.test_dataset, **loader_kwargs
+            DataUtils._dataset(DataUtils._tmp_dir, train=False, transform=DataUtils.img_transform), **loader_kwargs
         )
 
     def test(self, model, device):
