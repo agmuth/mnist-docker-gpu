@@ -12,22 +12,21 @@ class DataUtils:
     img_transform = transforms.Compose(
         [
             transforms.ToTensor(),
-            transforms.Resize((28, 28), antialias=True),
-            transforms.Normalize((0.1307,), (0.3081,)),
+            transforms.Resize((28, 28), antialias=False),
         ]
     )
-
-    # train_dataset = _dataset(
-    #     _tmp_dir, train=True, download=False, transform=img_transform
-    # )
-    # test_dataset = _dataset(_tmp_dir, train=False, transform=img_transform)
 
 
 class Trainer:
     def __init__(self, loader_kwargs):
         self._loader = torch.utils.data.DataLoader(
             DataUtils._dataset(
-                DataUtils._tmp_dir, train=True, download=True, transform=DataUtils.img_transform
+                DataUtils._tmp_dir, train=True, download=True, transform=transforms.Compose(
+                    DataUtils.img_transform.transforms
+                    + [
+                        transforms.RandomRotation(degrees=45),
+                    ]
+                )
             ),
             **loader_kwargs
         )
